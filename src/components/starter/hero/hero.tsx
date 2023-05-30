@@ -1,16 +1,35 @@
-import { component$ } from '@builder.io/qwik';
-import styles from './hero.module.css';
+import { component$, useSignal } from "@builder.io/qwik"
+import styles from "./hero.module.css"
 
 export default component$(() => {
+  const node = useSignal<Element>()
+
   return (
-    <div class={['container', styles.hero]}>
-      <h1>
-        So <span class="highlight">fantastic</span>
-        <br />
-        to have <span class="highlight">you</span> here
+    <div class={["container", styles.hero]}>
+      <h1 class="text-6xl">
+        <span class="highlight">Sunny</span> Pass
+        <div class="text-3xl mt-2">
+          แคล้วคลาด<span class="highlight">พ้นภัย</span>
+        </div>
       </h1>
+
+      <div
+        ref={node}
+        class="flex items-center justify-center relative w-full aspect-square mx-auto"
+      >
+        <img
+          src="/images/sunny-bg.png"
+          class="absolute inset-0 w-full h-full z-0"
+        />
+        <img
+          src="/images/sunny-template.png"
+          class="absolute inset-0 w-full h-full z-10"
+        />
+        {/* <div bind:this={drawArea} class="absolute w-full h-full">hi</div> */}
+      </div>
+
       <p>Have fun building your App with Qwik.</p>
-      <div class={styles['button-group']}>
+      <div class={styles["button-group"]}>
         <button
           onClick$={async () => {
             const defaults = {
@@ -19,50 +38,50 @@ export default component$(() => {
               gravity: 0,
               decay: 0.95,
               startVelocity: 30,
-              colors: ['006ce9', 'ac7ff4', '18b6f6', '713fc2', 'ffffff'],
+              colors: ["006ce9", "ac7ff4", "18b6f6", "713fc2", "ffffff"],
               origin: {
                 x: 0.5,
                 y: 0.35,
               },
-            };
+            }
 
             function loadConfetti() {
               return new Promise<(opts: any) => void>((resolve, reject) => {
                 if ((globalThis as any).confetti) {
-                  return resolve((globalThis as any).confetti as any);
+                  return resolve((globalThis as any).confetti as any)
                 }
-                const script = document.createElement('script');
+                const script = document.createElement("script")
                 script.src =
-                  'https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js';
+                  "https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"
                 script.onload = () =>
-                  resolve((globalThis as any).confetti as any);
-                script.onerror = reject;
-                document.head.appendChild(script);
-                script.remove();
-              });
+                  resolve((globalThis as any).confetti as any)
+                script.onerror = reject
+                document.head.appendChild(script)
+                script.remove()
+              })
             }
 
-            const confetti = await loadConfetti();
+            const confetti = await loadConfetti()
 
             function shoot() {
               confetti({
                 ...defaults,
                 particleCount: 80,
                 scalar: 1.2,
-              });
+              })
 
               confetti({
                 ...defaults,
                 particleCount: 60,
                 scalar: 0.75,
-              });
+              })
             }
 
-            setTimeout(shoot, 0);
-            setTimeout(shoot, 100);
-            setTimeout(shoot, 200);
-            setTimeout(shoot, 300);
-            setTimeout(shoot, 400);
+            setTimeout(shoot, 0)
+            setTimeout(shoot, 100)
+            setTimeout(shoot, 200)
+            setTimeout(shoot, 300)
+            setTimeout(shoot, 400)
           }}
         >
           Time to celebrate
@@ -76,5 +95,5 @@ export default component$(() => {
         </a>
       </div>
     </div>
-  );
-});
+  )
+})
