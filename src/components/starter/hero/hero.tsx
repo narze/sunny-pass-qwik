@@ -1,8 +1,10 @@
 import { component$, useSignal } from "@builder.io/qwik"
 import styles from "./hero.module.css"
+import { SunnyBg } from "./SunnyBg"
 
 export default component$(() => {
   const node = useSignal<Element>()
+  const color = useSignal<string>("#ff0000")
 
   return (
     <div class={["container", styles.hero]}>
@@ -15,84 +17,16 @@ export default component$(() => {
 
       <div
         ref={node}
-        class="flex items-center justify-center relative w-full aspect-square mx-auto"
+        class="flex items-center justify-center relative w-full max-w-5xl aspect-square mx-auto"
       >
-        <img
-          src="/images/sunny-bg.svg"
-          class="absolute inset-0 w-full h-full z-0"
-        />
+        <div class="absolute inset-0 w-full aspect-square z-0">
+          <SunnyBg color={color} />
+        </div>
+
         <img
           src="/images/sunny-template.png"
-          class="absolute inset-0 w-full h-full z-10"
+          class="absolute inset-0 w-full aspect-square z-10"
         />
-        {/* <div bind:this={drawArea} class="absolute w-full h-full">hi</div> */}
-      </div>
-
-      <p>Have fun building your App with Qwik.</p>
-      <div class={styles["button-group"]}>
-        <button
-          onClick$={async () => {
-            const defaults = {
-              spread: 360,
-              ticks: 70,
-              gravity: 0,
-              decay: 0.95,
-              startVelocity: 30,
-              colors: ["006ce9", "ac7ff4", "18b6f6", "713fc2", "ffffff"],
-              origin: {
-                x: 0.5,
-                y: 0.35,
-              },
-            }
-
-            function loadConfetti() {
-              return new Promise<(opts: any) => void>((resolve, reject) => {
-                if ((globalThis as any).confetti) {
-                  return resolve((globalThis as any).confetti as any)
-                }
-                const script = document.createElement("script")
-                script.src =
-                  "https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"
-                script.onload = () =>
-                  resolve((globalThis as any).confetti as any)
-                script.onerror = reject
-                document.head.appendChild(script)
-                script.remove()
-              })
-            }
-
-            const confetti = await loadConfetti()
-
-            function shoot() {
-              confetti({
-                ...defaults,
-                particleCount: 80,
-                scalar: 1.2,
-              })
-
-              confetti({
-                ...defaults,
-                particleCount: 60,
-                scalar: 0.75,
-              })
-            }
-
-            setTimeout(shoot, 0)
-            setTimeout(shoot, 100)
-            setTimeout(shoot, 200)
-            setTimeout(shoot, 300)
-            setTimeout(shoot, 400)
-          }}
-        >
-          Time to celebrate
-        </button>
-        <a
-          href="https://qwik.builder.io/docs"
-          target="_blank"
-          class="button button-dark"
-        >
-          Explore the docs
-        </a>
       </div>
     </div>
   )
