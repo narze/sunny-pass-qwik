@@ -110,7 +110,10 @@ export default component$(() => {
       </div>
 
       <div class="flex items-center justify-center relative w-full max-w-5xl aspect-square mx-auto overflow-visible">
-        <div class="w-full absolute inset-0 aspect-square" id="img">
+        <div
+          class="w-full absolute inset-0 aspect-square bg-transparent"
+          id="img"
+        >
           <div class="absolute text-black inset-0 w-full aspect-square">
             <svg
               xmlns="http://www.w3.org/2000/svg"
