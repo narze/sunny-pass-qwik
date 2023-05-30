@@ -18,7 +18,7 @@ export default component$(() => {
         class="flex items-center justify-center relative w-full aspect-square mx-auto"
       >
         <img
-          src="/images/sunny-bg.png"
+          src="/images/sunny-bg.svg"
           class="absolute inset-0 w-full h-full z-0"
         />
         <img
