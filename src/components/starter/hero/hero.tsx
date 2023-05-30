@@ -7,14 +7,12 @@ import {
   useVisibleTask$,
 } from "@builder.io/qwik"
 import styles from "./hero.module.css"
-import { SunnyBg } from "./SunnyBg"
 import Picker from "vanilla-picker"
 // import { saveAs } from "file-saver"
 import { copyImageToClipboard } from "copy-image-clipboard"
 import * as htmlToImage from "html-to-image"
 
 export default component$(() => {
-  const node = useSignal<HTMLElement>()
   const color = useSignal<string>("#ff7300")
   const pickerRef = useSignal<HTMLElement>()
 
