@@ -1,10 +1,13 @@
 import {
   type NoSerialize,
+  $,
   component$,
   noSerialize,
   useSignal,
   useStore,
   useVisibleTask$,
+  useTask$,
+  useComputed$,
 } from "@builder.io/qwik"
 import styles from "./hero.module.css"
 import Picker from "vanilla-picker"
@@ -12,9 +15,15 @@ import { saveAs } from "file-saver"
 import { copyImageToClipboard } from "copy-image-clipboard"
 import * as htmlToImage from "html-to-image"
 
+const thaiNumerals = ["๐", "๑", "๒", "๓", "๔", "๕", "๖", "๗", "๘", "๙"]
+
 export default component$(() => {
   const color = useSignal<string>("#ff7300")
   const pickerRef = useSignal<HTMLElement>()
+  const text = useSignal<string>(`${new Date().getMonth() + 1}`)
+  const transformedText = useComputed$(() => {
+    return text.value.replace(/\d/g, (digit) => thaiNumerals[parseInt(digit)])
+  })
 
   useVisibleTask$(() => {
     const picker = new Picker({
@@ -108,6 +117,13 @@ export default component$(() => {
           เซฟภาพ
         </button>
       </div>
+      <div class="flex items-center justify-center text-black">
+        <input
+          type="text"
+          bind:value={text}
+          class="text-center rounded p-2 text-xl"
+        />
+      </div>
 
       <div class="flex items-center justify-center relative w-full max-w-5xl aspect-square mx-auto overflow-visible">
         <div
@@ -137,6 +153,10 @@ export default component$(() => {
             src="/images/sunny-template.png"
             class="absolute inset-0 w-full aspect-square"
           />
+
+          <div class="absolute text-black inset-x-0 text-center bottom-[17%] text-5xl font-bold w-full ">
+            {transformedText.value}
+          </div>
         </div>
       </div>
     </div>
