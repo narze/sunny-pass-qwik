@@ -6,7 +6,6 @@ import {
   useSignal,
   useStore,
   useVisibleTask$,
-  useTask$,
   useComputed$,
 } from "@builder.io/qwik"
 import styles from "./hero.module.css"
@@ -121,6 +120,7 @@ export default component$(() => {
         <input
           type="text"
           bind:value={text}
+          placeholder="เดือน (?)"
           class="text-center rounded p-2 text-xl"
         />
       </div>
@@ -154,7 +154,48 @@ export default component$(() => {
             class="absolute inset-0 w-full aspect-square"
           />
 
-          <div class="absolute text-black inset-x-0 text-center bottom-[17%] text-5xl font-bold w-full ">
+          <div
+            class={[
+              styles.label,
+              "z-20 absolute text-[#675cee] inset-x-0 text-center bottom-[13%] text-[5rem] font-bold w-full",
+            ]}
+          >
+            {transformedText.value}
+          </div>
+
+          <div
+            class={[
+              styles.label,
+              "z-10 absolute text-white inset-x-0 text-center bottom-[calc(13%-4px)] pl-[8px] text-[5rem] font-bold w-full",
+            ]}
+          >
+            {transformedText.value}
+          </div>
+
+          <div
+            class={[
+              styles.label,
+              "z-10 absolute text-white inset-x-0 text-center bottom-[calc(13%+4px)] pr-[8px] text-[5rem] font-bold w-full",
+            ]}
+          >
+            {transformedText.value}
+          </div>
+
+          <div
+            class={[
+              styles.label,
+              "z-10 absolute text-white inset-x-0 text-center bottom-[calc(13%+4px)] pl-[8px] text-[5rem] font-bold w-full",
+            ]}
+          >
+            {transformedText.value}
+          </div>
+
+          <div
+            class={[
+              styles.label,
+              "z-10 absolute text-white inset-x-0 text-center bottom-[calc(13%-4px)] pr-[8px] text-[5rem] font-bold w-full",
+            ]}
+          >
             {transformedText.value}
           </div>
         </div>
